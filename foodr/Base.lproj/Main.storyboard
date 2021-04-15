@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,7 +18,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAn-h8-8LA">
                                 <rect key="frame" x="344" y="98" width="60" height="35"/>
-                                <color key="backgroundColor" name="AccentColor"/>
+                                <color key="backgroundColor" red="0.56163740158081055" green="0.37268990278244019" blue="0.091605611145496368" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="JuV-eG-y20"/>
                                     <constraint firstAttribute="width" constant="60" id="Wdc-MX-Xeg"/>
@@ -86,14 +85,14 @@
                                             <outlet property="restaurantAddressLabel" destination="eJq-9o-h8m" id="Q1M-mD-g5z"/>
                                             <outlet property="restaurantImageView" destination="ZzP-Nv-Yl9" id="jI4-7n-PbU"/>
                                             <outlet property="restaurantNameLabel" destination="Mt2-SO-A6h" id="PlZ-Hp-d0n"/>
-                                            <segue destination="5Vj-HR-eYd" kind="show" id="0LG-RS-jDe"/>
+                                            <segue destination="5Vj-HR-eYd" kind="show" identifier="getRestaurantDetail" id="0LG-RS-jDe"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h3X-p9-ktV"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94805997610092163" green="0.87529283761978149" blue="0.77242976427078247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JAn-h8-8LA" firstAttribute="top" secondItem="h3X-p9-ktV" secondAttribute="top" constant="10" id="C02-z6-cK4"/>
                             <constraint firstItem="HbJ-NG-Us6" firstAttribute="top" secondItem="jgi-hi-pHB" secondAttribute="bottom" constant="10" id="DIg-xk-Law"/>
@@ -114,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fuv-JP-sja" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1711.5942028985507" y="-686.38392857142856"/>
+            <point key="canvasLocation" x="1712" y="-729"/>
         </scene>
         <!--Search Restaurant Detail View Controller-->
         <scene sceneID="PxR-zY-TOB">
@@ -123,14 +122,66 @@
                     <view key="view" contentMode="scaleToFill" id="Saa-df-VB4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsb-TB-Gxd">
+                                <rect key="frame" x="20" y="502" width="252" height="41"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BoY-Aw-QuD">
+                                <rect key="frame" x="20" y="108" width="374" height="374"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="374" id="FoW-HQ-zuK"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Hu-2V-Ijj">
+                                <rect key="frame" x="132" y="812" width="150" height="50"/>
+                                <color key="backgroundColor" red="0.705810546875" green="0.44763972499303512" blue="0.46353754046462459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="OI1-UY-RRw"/>
+                                    <constraint firstAttribute="width" constant="150" id="kt9-fe-f6D"/>
+                                </constraints>
+                                <state key="normal" title="Add to collection">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKt-fr-49E">
+                                <rect key="frame" x="20" y="563" width="236.5" height="33.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="MKe-36-zhc"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.95004349946975708" green="0.80674093961715698" blue="0.82223892211914062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.71394234895706177" green="0.70723742246627808" blue="0.9338420033454895" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="MKe-36-zhc" firstAttribute="trailing" secondItem="BoY-Aw-QuD" secondAttribute="trailing" constant="20" id="4Pm-uO-BQs"/>
+                            <constraint firstItem="qKt-fr-49E" firstAttribute="leading" secondItem="MKe-36-zhc" secondAttribute="leading" constant="20" id="GbH-k6-gLZ"/>
+                            <constraint firstItem="MKe-36-zhc" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qKt-fr-49E" secondAttribute="trailing" symbolic="YES" id="LE1-xI-V1v"/>
+                            <constraint firstItem="MKe-36-zhc" firstAttribute="bottom" secondItem="2Hu-2V-Ijj" secondAttribute="bottom" id="UgA-WV-2mJ"/>
+                            <constraint firstItem="BoY-Aw-QuD" firstAttribute="top" secondItem="MKe-36-zhc" secondAttribute="top" constant="20" id="eKj-i5-1ET"/>
+                            <constraint firstItem="MKe-36-zhc" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hsb-TB-Gxd" secondAttribute="trailing" symbolic="YES" id="hSU-Yz-x5N"/>
+                            <constraint firstItem="2Hu-2V-Ijj" firstAttribute="centerX" secondItem="Saa-df-VB4" secondAttribute="centerX" id="l09-G0-dRx"/>
+                            <constraint firstItem="hsb-TB-Gxd" firstAttribute="top" secondItem="BoY-Aw-QuD" secondAttribute="bottom" constant="20" id="lmB-mB-OIA"/>
+                            <constraint firstItem="qKt-fr-49E" firstAttribute="top" secondItem="hsb-TB-Gxd" secondAttribute="bottom" constant="20" id="pbO-Nq-bqa"/>
+                            <constraint firstItem="BoY-Aw-QuD" firstAttribute="leading" secondItem="MKe-36-zhc" secondAttribute="leading" constant="20" id="pbV-eQ-kFv"/>
+                            <constraint firstItem="hsb-TB-Gxd" firstAttribute="leading" secondItem="MKe-36-zhc" secondAttribute="leading" constant="20" id="sUl-gN-dj1"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QhJ-zY-MO7"/>
+                    <connections>
+                        <outlet property="addToCollectionButton" destination="2Hu-2V-Ijj" id="bcT-ZN-eGi"/>
+                        <outlet property="addToCollectionButtonTapped" destination="2Hu-2V-Ijj" id="kYF-bC-b5a"/>
+                        <outlet property="restaurantAddressLabel" destination="qKt-fr-49E" id="Abp-IP-Bkc"/>
+                        <outlet property="restaurantImageView" destination="BoY-Aw-QuD" id="VD6-Gb-BuK"/>
+                        <outlet property="restaurantNameLabel" destination="hsb-TB-Gxd" id="sII-US-LcS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvI-Py-LAt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2532" y="-681"/>
+            <point key="canvasLocation" x="2559" y="-729"/>
         </scene>
         <!--Detail Table View Controller-->
         <scene sceneID="5b6-cl-DB0">
@@ -335,7 +386,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGb-BO-Nbx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="nSM-RB-YN9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1499" y="759"/>
+            <point key="canvasLocation" x="1712" y="759"/>
         </scene>
         <!--foodr-->
         <scene sceneID="rFE-Bs-QlK">
@@ -496,9 +547,6 @@
         <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="xmark.circle" catalog="system" width="128" height="121"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

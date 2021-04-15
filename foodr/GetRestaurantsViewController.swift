@@ -28,6 +28,7 @@ class GetRestaurantsViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         restaurants.removeAll()
+        managedObjectContext.reset()
         searchButtonTappedHelper()
     }
     
@@ -140,7 +141,7 @@ class GetRestaurantsViewController: UIViewController, UITableViewDelegate, UITab
                                 self.tableView.reloadData()
                             }
                         } catch {
-                            fatalError("Failed to fetch employees: \(error)")
+                            fatalError("Failed to fetch restaurant: \(error)")
                         }
                     }
                 })
@@ -149,6 +150,17 @@ class GetRestaurantsViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
 
+    // MARK: - Segue
+    
+    // Prepare
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "getRestaurantDetail") {
+            let thirdVC = segue.destination as! SearchRestaurantDetailViewController
+            let row = self.tableView?.indexPathForSelectedRow?.row ?? 0
+            thirdVC.tappedRestaurant = restaurants[row]
+        }
+    }
+    
     // MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
