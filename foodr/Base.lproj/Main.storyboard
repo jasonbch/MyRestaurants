@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Get Restaurants View Controller-->
+        <!--Search Restaurants View Controller-->
         <scene sceneID="07C-HF-s77">
             <objects>
-                <viewController id="lId-aU-AAB" customClass="GetRestaurantsViewController" customModule="foodr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lId-aU-AAB" customClass="SearchRestaurantsViewController" customModule="foodr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3BK-Xd-i97">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,8 +51,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mt2-SO-A6h">
-                                                    <rect key="frame" x="180" y="20" width="214" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="180" y="20" width="204" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -64,27 +64,64 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJq-9o-h8m">
-                                                    <rect key="frame" x="180" y="51" width="214" height="21"/>
+                                                    <rect key="frame" x="180" y="51" width="204" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kz-Jh-AjT">
+                                                    <rect key="frame" x="180" y="79" width="105.5" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxp-Sy-CrL">
+                                                    <rect key="frame" x="180" y="107" width="204" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xg-za-c94">
+                                                    <rect key="frame" x="286.5" y="79" width="5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlP-e9-YpU">
+                                                    <rect key="frame" x="296.5" y="79" width="37" height="18"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.97327475794586316" green="1" blue="0.90374656652834928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Mt2-SO-A6h" secondAttribute="trailing" constant="20" id="4sA-CV-nYX"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Mt2-SO-A6h" secondAttribute="trailing" constant="10" id="17m-7x-SW2"/>
+                                                <constraint firstItem="QlP-e9-YpU" firstAttribute="leading" secondItem="5xg-za-c94" secondAttribute="trailing" constant="5" id="1h1-aH-pey"/>
+                                                <constraint firstItem="5xg-za-c94" firstAttribute="leading" secondItem="5kz-Jh-AjT" secondAttribute="trailing" constant="1" id="835-Eg-UlR"/>
+                                                <constraint firstItem="5kz-Jh-AjT" firstAttribute="top" secondItem="eJq-9o-h8m" secondAttribute="bottom" constant="10" id="8qb-MM-M04"/>
                                                 <constraint firstItem="ZzP-Nv-Yl9" firstAttribute="leading" secondItem="Qo1-oZ-Kfn" secondAttribute="leading" constant="20" id="H7s-yQ-3QZ"/>
                                                 <constraint firstItem="Mt2-SO-A6h" firstAttribute="leading" secondItem="ZzP-Nv-Yl9" secondAttribute="trailing" constant="10" id="Iog-7I-boO"/>
-                                                <constraint firstAttribute="trailing" secondItem="eJq-9o-h8m" secondAttribute="trailing" constant="20" id="Okf-bn-l0M"/>
                                                 <constraint firstItem="ZzP-Nv-Yl9" firstAttribute="top" secondItem="Qo1-oZ-Kfn" secondAttribute="top" constant="20" id="PnO-i3-mLh"/>
+                                                <constraint firstItem="5xg-za-c94" firstAttribute="top" secondItem="eJq-9o-h8m" secondAttribute="bottom" constant="10" id="SnR-9u-WSB"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="eJq-9o-h8m" secondAttribute="trailing" constant="10" id="SqO-Wz-vcw"/>
+                                                <constraint firstItem="5kz-Jh-AjT" firstAttribute="leading" secondItem="ZzP-Nv-Yl9" secondAttribute="trailing" constant="10" id="UKX-I4-pTE"/>
                                                 <constraint firstItem="eJq-9o-h8m" firstAttribute="leading" secondItem="ZzP-Nv-Yl9" secondAttribute="trailing" constant="10" id="UTg-aq-ib6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Uxp-Sy-CrL" secondAttribute="trailing" constant="10" id="bY7-Vw-fG4"/>
                                                 <constraint firstItem="eJq-9o-h8m" firstAttribute="top" secondItem="Mt2-SO-A6h" secondAttribute="bottom" constant="10" id="bqc-MQ-S5P"/>
+                                                <constraint firstItem="Uxp-Sy-CrL" firstAttribute="leading" secondItem="ZzP-Nv-Yl9" secondAttribute="trailing" constant="10" id="cCA-RF-rBP"/>
+                                                <constraint firstItem="Uxp-Sy-CrL" firstAttribute="top" secondItem="5kz-Jh-AjT" secondAttribute="bottom" constant="10" id="gt8-MN-wFD"/>
                                                 <constraint firstItem="Mt2-SO-A6h" firstAttribute="top" secondItem="Qo1-oZ-Kfn" secondAttribute="top" constant="20" id="ntA-se-Ahi"/>
+                                                <constraint firstItem="QlP-e9-YpU" firstAttribute="top" secondItem="eJq-9o-h8m" secondAttribute="bottom" constant="10" id="pa8-eT-DpC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="restaurantAddressLabel" destination="eJq-9o-h8m" id="Q1M-mD-g5z"/>
+                                            <outlet property="restaurantCityLabel" destination="5kz-Jh-AjT" id="VY1-os-I5d"/>
                                             <outlet property="restaurantImageView" destination="ZzP-Nv-Yl9" id="jI4-7n-PbU"/>
                                             <outlet property="restaurantNameLabel" destination="Mt2-SO-A6h" id="PlZ-Hp-d0n"/>
+                                            <outlet property="restaurantRatingLabel" destination="Uxp-Sy-CrL" id="Vkq-Wq-YEK"/>
+                                            <outlet property="restaurantStateLabel" destination="QlP-e9-YpU" id="fgx-7C-GYC"/>
                                             <segue destination="5Vj-HR-eYd" kind="show" identifier="getRestaurantDetail" id="0LG-RS-jDe"/>
                                         </connections>
                                     </tableViewCell>
@@ -113,7 +150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fuv-JP-sja" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1712" y="-729"/>
+            <point key="canvasLocation" x="1711.5942028985507" y="-729.24107142857144"/>
         </scene>
         <!--Search Restaurant Detail View Controller-->
         <scene sceneID="PxR-zY-TOB">
@@ -146,9 +183,39 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKt-fr-49E">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKt-fr-49E">
                                 <rect key="frame" x="20" y="563" width="236.5" height="33.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bax-2Q-Jya">
+                                <rect key="frame" x="20" y="611.5" width="38" height="26.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIF-iJ-ocF">
+                                <rect key="frame" x="74" y="611.5" width="50" height="26.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfU-9m-Jux">
+                                <rect key="frame" x="20" y="653" width="56" height="24"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJr-Cu-EhL">
+                                <rect key="frame" x="59" y="611.5" width="5" height="26.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BjE-bz-JlU">
+                                <rect key="frame" x="20" y="692" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -157,17 +224,27 @@
                         <color key="backgroundColor" red="0.95004349946975708" green="0.80674093961715698" blue="0.82223892211914062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.71394234895706177" green="0.70723742246627808" blue="0.9338420033454895" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="bax-2Q-Jya" firstAttribute="leading" secondItem="MKe-36-zhc" secondAttribute="leading" constant="20" id="2cx-oB-fCy"/>
                             <constraint firstItem="MKe-36-zhc" firstAttribute="trailing" secondItem="BoY-Aw-QuD" secondAttribute="trailing" constant="20" id="4Pm-uO-BQs"/>
+                            <constraint firstItem="pJr-Cu-EhL" firstAttribute="leading" secondItem="bax-2Q-Jya" secondAttribute="trailing" constant="1" id="8Kl-i8-mV5"/>
                             <constraint firstItem="qKt-fr-49E" firstAttribute="leading" secondItem="MKe-36-zhc" secondAttribute="leading" constant="20" id="GbH-k6-gLZ"/>
+                            <constraint firstItem="BjE-bz-JlU" firstAttribute="top" secondItem="rfU-9m-Jux" secondAttribute="bottom" constant="15" id="Gn2-Sb-ajo"/>
                             <constraint firstItem="MKe-36-zhc" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qKt-fr-49E" secondAttribute="trailing" symbolic="YES" id="LE1-xI-V1v"/>
+                            <constraint firstItem="bax-2Q-Jya" firstAttribute="top" secondItem="qKt-fr-49E" secondAttribute="bottom" constant="15" id="OVX-it-thO"/>
                             <constraint firstItem="MKe-36-zhc" firstAttribute="bottom" secondItem="2Hu-2V-Ijj" secondAttribute="bottom" id="UgA-WV-2mJ"/>
                             <constraint firstItem="BoY-Aw-QuD" firstAttribute="top" secondItem="MKe-36-zhc" secondAttribute="top" constant="20" id="eKj-i5-1ET"/>
                             <constraint firstItem="MKe-36-zhc" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hsb-TB-Gxd" secondAttribute="trailing" symbolic="YES" id="hSU-Yz-x5N"/>
                             <constraint firstItem="2Hu-2V-Ijj" firstAttribute="centerX" secondItem="Saa-df-VB4" secondAttribute="centerX" id="l09-G0-dRx"/>
                             <constraint firstItem="hsb-TB-Gxd" firstAttribute="top" secondItem="BoY-Aw-QuD" secondAttribute="bottom" constant="20" id="lmB-mB-OIA"/>
+                            <constraint firstItem="pJr-Cu-EhL" firstAttribute="top" secondItem="qKt-fr-49E" secondAttribute="bottom" constant="15" id="mkJ-mO-FU2"/>
+                            <constraint firstItem="rfU-9m-Jux" firstAttribute="leading" secondItem="MKe-36-zhc" secondAttribute="leading" constant="20" id="p7R-lJ-vz0"/>
                             <constraint firstItem="qKt-fr-49E" firstAttribute="top" secondItem="hsb-TB-Gxd" secondAttribute="bottom" constant="20" id="pbO-Nq-bqa"/>
                             <constraint firstItem="BoY-Aw-QuD" firstAttribute="leading" secondItem="MKe-36-zhc" secondAttribute="leading" constant="20" id="pbV-eQ-kFv"/>
+                            <constraint firstItem="dIF-iJ-ocF" firstAttribute="leading" secondItem="pJr-Cu-EhL" secondAttribute="trailing" constant="10" id="rcS-eZ-x1g"/>
+                            <constraint firstItem="rfU-9m-Jux" firstAttribute="top" secondItem="bax-2Q-Jya" secondAttribute="bottom" constant="15" id="rlU-fS-pVK"/>
                             <constraint firstItem="hsb-TB-Gxd" firstAttribute="leading" secondItem="MKe-36-zhc" secondAttribute="leading" constant="20" id="sUl-gN-dj1"/>
+                            <constraint firstItem="dIF-iJ-ocF" firstAttribute="top" secondItem="qKt-fr-49E" secondAttribute="bottom" constant="15" id="xHA-9W-jAs"/>
+                            <constraint firstItem="BjE-bz-JlU" firstAttribute="leading" secondItem="MKe-36-zhc" secondAttribute="leading" constant="20" id="xLt-h9-nT1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QhJ-zY-MO7"/>
@@ -175,8 +252,12 @@
                         <outlet property="addToCollectionButton" destination="2Hu-2V-Ijj" id="bcT-ZN-eGi"/>
                         <outlet property="addToCollectionButtonTapped" destination="2Hu-2V-Ijj" id="kYF-bC-b5a"/>
                         <outlet property="restaurantAddressLabel" destination="qKt-fr-49E" id="Abp-IP-Bkc"/>
+                        <outlet property="restaurantCityLabel" destination="bax-2Q-Jya" id="j5x-Yr-wZh"/>
                         <outlet property="restaurantImageView" destination="BoY-Aw-QuD" id="VD6-Gb-BuK"/>
                         <outlet property="restaurantNameLabel" destination="hsb-TB-Gxd" id="sII-US-LcS"/>
+                        <outlet property="restaurantNoteLabel" destination="BjE-bz-JlU" id="OhZ-x5-Dpc"/>
+                        <outlet property="restaurantRatingLabel" destination="rfU-9m-Jux" id="5bd-cS-pc1"/>
+                        <outlet property="restaurantStateLabel" destination="dIF-iJ-ocF" id="hXM-nu-2Zl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvI-Py-LAt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

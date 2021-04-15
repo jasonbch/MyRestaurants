@@ -17,6 +17,10 @@ class SearchRestaurantDetailViewController: UIViewController {
     @IBOutlet weak var restaurantImageView: UIImageView!
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var restaurantAddressLabel: UILabel!
+    @IBOutlet weak var restaurantCityLabel: UILabel!
+    @IBOutlet weak var restaurantStateLabel: UILabel!
+    @IBOutlet weak var restaurantRatingLabel: UILabel!
+    @IBOutlet weak var restaurantNoteLabel: UILabel!
     @IBOutlet weak var addToCollectionButton: UIButton!
     
     @IBOutlet weak var addToCollectionButtonTapped: UIButton!
@@ -28,11 +32,15 @@ class SearchRestaurantDetailViewController: UIViewController {
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         managedObjectContext = appDelegate.persistentContainer.viewContext
         
-        if let restaurant = tappedRestaurant {
-            restaurantNameLabel?.text = restaurant.value(forKey: "name") as? String
-            restaurantAddressLabel?.text = restaurant.value(forKey: "address") as? String
+        if let myRestaurant = tappedRestaurant {
+            restaurantNameLabel?.text = myRestaurant.value(forKey: "name") as? String
+            restaurantAddressLabel?.text = myRestaurant.value(forKey: "address") as? String
+            restaurantCityLabel?.text = myRestaurant.value(forKey: "city") as? String
+            restaurantStateLabel?.text = myRestaurant.value(forKey: "state") as? String
+            restaurantRatingLabel?.text = "Rating: " + (myRestaurant.value(forKey: "rating") as? Float)!.description
+            restaurantNoteLabel?.text = "Note: "
             
-            if let imageData = restaurant.value(forKey: "image") as? Data {
+            if let imageData = myRestaurant.value(forKey: "image") as? Data {
                 let image = UIImage(data:imageData, scale:1.0)
                 restaurantImageView?.image = image
             } else {
@@ -62,3 +70,4 @@ class SearchRestaurantDetailViewController: UIViewController {
     }
     */
 }
+

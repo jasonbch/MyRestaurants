@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class GetRestaurantsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate  {
+class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate  {
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
@@ -106,6 +106,8 @@ class GetRestaurantsViewController: UIViewController, UITableViewDelegate, UITab
                     restaurant.setValue(address, forKey: "address")
                     restaurant.setValue(rating, forKey: "rating")
                     restaurant.setValue(id, forKey: "id")
+                    restaurant.setValue(city, forKey: "city")
+                    restaurant.setValue(state, forKey: "state")
                     
                     restaurants.append(restaurant)
                     
@@ -125,7 +127,7 @@ class GetRestaurantsViewController: UIViewController, UITableViewDelegate, UITab
         // URL comes from API response; definitely needs some safety checks
         if let urlStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             if let url = URL(string: urlStr) {
-                let dataTask = URLSession.shared.dataTask(with: url, completionHandler: { [self](data, response, error) -> Void in
+                let dataTask = URLSession.shared.dataTask(with: url, completionHandler: {(data, response, error) -> Void in
                     if let imageData = data {
                         let image = UIImage(data: imageData)?.pngData()
                         
@@ -134,7 +136,7 @@ class GetRestaurantsViewController: UIViewController, UITableViewDelegate, UITab
                         fetchRequest.predicate = NSPredicate(format: "id == %@", filter)
                         
                         do {
-                            let fetchedRestaurant = try managedObjectContext.fetch(fetchRequest) as! [Restaurant]
+                            let fetchedRestaurant = try self.managedObjectContext.fetch(fetchRequest) as! [Restaurant]
                             
                             DispatchQueue.main.async {
                                 fetchedRestaurant[0].setValue(image, forKey: "image")
@@ -176,6 +178,9 @@ class GetRestaurantsViewController: UIViewController, UITableViewDelegate, UITab
         
         cell.restaurantNameLabel?.text = myRestaurant.value(forKey: "name") as? String
         cell.restaurantAddressLabel?.text = myRestaurant.value(forKey: "address") as? String
+        cell.restaurantCityLabel?.text = myRestaurant.value(forKey: "city") as? String
+        cell.restaurantStateLabel?.text = myRestaurant.value(forKey: "state") as? String
+        cell.restaurantRatingLabel?.text = "Rating: " + (myRestaurant.value(forKey: "rating") as? Float)!.description
         
         if let imageData = myRestaurant.value(forKey: "image") as? Data {
             let image = UIImage(data:imageData,scale:1.0)

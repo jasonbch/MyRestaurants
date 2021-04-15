@@ -62,7 +62,7 @@ class MainViewController: UIViewController {
         let name = restaurant.value(forKey: "name") as? String
         let address = restaurant.value(forKey: "address") as? String
         let rating = restaurant.value(forKey: "rating") as? Float
-        let image = restaurant.value(forKey: "image") as? UIImage
+        // let image = restaurant.value(forKey: "image") as? UIImage
         print("Restaurant: name = \(name!), address = \(address!), rating = \(rating!)")
     }
     
