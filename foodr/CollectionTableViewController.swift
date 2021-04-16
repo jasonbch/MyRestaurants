@@ -90,6 +90,15 @@ class CollectionTableViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "getCollectionDetail") {
+            let thirdVC = segue.destination as! CollectionDetailViewController
+            let row = self.tableView?.indexPathForSelectedRow?.row ?? 0
+            thirdVC.tappedRestaurant = restaurants![row]
+        }
+    }
+    
+    // MARK: - Core Data
     func deleteRestaurant(_ restaurant: NSManagedObject) {
         managedObjectContext.delete(restaurant)
         appDelegate.saveContext()
