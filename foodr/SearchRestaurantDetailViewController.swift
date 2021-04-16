@@ -23,8 +23,6 @@ class SearchRestaurantDetailViewController: UIViewController {
     @IBOutlet weak var restaurantNoteLabel: UILabel!
     @IBOutlet weak var addToCollectionButton: UIButton!
     
-    @IBOutlet weak var addToCollectionButtonTapped: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,14 +58,39 @@ class SearchRestaurantDetailViewController: UIViewController {
         addToCollectionButton.layer.masksToBounds = true
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func addToCollectionButtonTapped(_ sender: UIButton) {
+        if let myRestaurant = tappedRestaurant {
+            let name = myRestaurant.value(forKey: "name") as? String
+            let rating = myRestaurant.value(forKey: "rating") as? Float
+            let image = myRestaurant.value(forKey: "image") as? Data
+            let address = myRestaurant.value(forKey: "address") as? String
+            let city = myRestaurant.value(forKey: "city") as? String
+            let state = myRestaurant.value(forKey: "state") as? String
+            let id = myRestaurant.value(forKey: "id") as? String
+            let note = myRestaurant.value(forKey: "note") as? String
+            
+            insertRestaurant(name: name, address: address, city: city, state: state, rating: rating, image: image, id: id, note: note)
+        }
     }
-    */
+    
+    func insertRestaurant(name: String?,
+                          address: String?,
+                          city: String?,
+                          state: String?,
+                          rating: Float?,
+                          image: Data?,
+                          id: String?,
+                          note: String?) {
+        let restaurant = NSEntityDescription.insertNewObject(forEntityName:
+        "Restaurant", into: self.managedObjectContext)
+        restaurant.setValue(name, forKey: "name")
+        restaurant.setValue(address, forKey: "address")
+        restaurant.setValue(rating, forKey: "rating")
+        restaurant.setValue(image, forKey: "image")
+        restaurant.setValue(id, forKey: "id")
+        restaurant.setValue(city, forKey: "city")
+        restaurant.setValue(state, forKey: "state")
+        restaurant.setValue(note, forKey: "note")
+        appDelegate.saveContext() // In AppDelegate.swift
+    }
 }
-

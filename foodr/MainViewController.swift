@@ -93,7 +93,7 @@ class MainViewController: UIViewController {
     // Prepare to send quote count to Add Quotation View
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "getAllRestaurants") {
-            let secondVC = segue.destination as! DetailTableViewController
+            let secondVC = segue.destination as! CollectionTableViewController
             secondVC.restaurants = restaurants
         }
     }

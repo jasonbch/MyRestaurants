@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		240311702626A35300CDD02E /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403116F2626A35300CDD02E /* RestaurantTableViewCell.swift */; };
 		240311752626BC6900CDD02E /* default-image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 240311742626BC6900CDD02E /* default-image.jpg */; };
+		2470F2F4262955E20055B3AC /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470F2F3262955E20055B3AC /* NoteTableViewCell.swift */; };
 		2481A01D26256C6900833B68 /* SearchRestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2481A01C26256C6900833B68 /* SearchRestaurantsViewController.swift */; };
 		2481A0222625850000833B68 /* SearchRestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2481A0212625850000833B68 /* SearchRestaurantDetailViewController.swift */; };
 		24F7A351261D1E4000B6EBAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F7A350261D1E4000B6EBAF /* AppDelegate.swift */; };
@@ -21,7 +22,7 @@
 		24F7A36B261D1E4100B6EBAF /* foodrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F7A36A261D1E4100B6EBAF /* foodrTests.swift */; };
 		24F7A376261D1E4100B6EBAF /* foodrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F7A375261D1E4100B6EBAF /* foodrUITests.swift */; };
 		24F7A38A261D349200B6EBAF /* AddRestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F7A389261D349200B6EBAF /* AddRestaurantViewController.swift */; };
-		24F7A38F261D52A500B6EBAF /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F7A38E261D52A500B6EBAF /* DetailTableViewController.swift */; };
+		24F7A38F261D52A500B6EBAF /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F7A38E261D52A500B6EBAF /* CollectionTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		2403116F2626A35300CDD02E /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
 		240311742626BC6900CDD02E /* default-image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default-image.jpg"; sourceTree = "<group>"; };
+		2470F2F3262955E20055B3AC /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		2481A01C26256C6900833B68 /* SearchRestaurantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantsViewController.swift; sourceTree = "<group>"; };
 		2481A0212625850000833B68 /* SearchRestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		24F7A34D261D1E4000B6EBAF /* foodr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foodr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +64,7 @@
 		24F7A375261D1E4100B6EBAF /* foodrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodrUITests.swift; sourceTree = "<group>"; };
 		24F7A377261D1E4100B6EBAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24F7A389261D349200B6EBAF /* AddRestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRestaurantViewController.swift; sourceTree = "<group>"; };
-		24F7A38E261D52A500B6EBAF /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		24F7A38E261D52A500B6EBAF /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,11 +124,12 @@
 				24F7A361261D1E4000B6EBAF /* Info.plist */,
 				24F7A359261D1E4000B6EBAF /* foodr.xcdatamodeld */,
 				24F7A389261D349200B6EBAF /* AddRestaurantViewController.swift */,
-				24F7A38E261D52A500B6EBAF /* DetailTableViewController.swift */,
+				24F7A38E261D52A500B6EBAF /* CollectionTableViewController.swift */,
 				2481A01C26256C6900833B68 /* SearchRestaurantsViewController.swift */,
 				240311742626BC6900CDD02E /* default-image.jpg */,
 				2481A0212625850000833B68 /* SearchRestaurantDetailViewController.swift */,
 				2403116F2626A35300CDD02E /* RestaurantTableViewCell.swift */,
+				2470F2F3262955E20055B3AC /* NoteTableViewCell.swift */,
 			);
 			path = foodr;
 			sourceTree = "<group>";
@@ -280,9 +283,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24F7A38F261D52A500B6EBAF /* DetailTableViewController.swift in Sources */,
+				24F7A38F261D52A500B6EBAF /* CollectionTableViewController.swift in Sources */,
 				24F7A35B261D1E4000B6EBAF /* foodr.xcdatamodeld in Sources */,
 				2481A01D26256C6900833B68 /* SearchRestaurantsViewController.swift in Sources */,
+				2470F2F4262955E20055B3AC /* NoteTableViewCell.swift in Sources */,
 				24F7A355261D1E4000B6EBAF /* MainViewController.swift in Sources */,
 				24F7A351261D1E4000B6EBAF /* AppDelegate.swift in Sources */,
 				24F7A38A261D349200B6EBAF /* AddRestaurantViewController.swift in Sources */,
