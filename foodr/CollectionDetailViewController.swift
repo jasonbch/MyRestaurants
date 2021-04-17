@@ -119,7 +119,11 @@ class CollectionDetailViewController: UIViewController, UITextFieldDelegate {
         
         addNoteButton.layer.cornerRadius = 4
         addNoteButton.layer.masksToBounds = true
+        
+        restaurantTextView.layer.cornerRadius = 4
+        restaurantTextView.layer.masksToBounds = true
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // Remove keyboard on return
         return false // Do default behavior
