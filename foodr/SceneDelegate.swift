@@ -39,6 +39,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        let navController = self.window?.rootViewController as! UINavigationController
+        
+        if let mainTVC = navController.topViewController as? CollectionTableViewController {
+            mainTVC.update() // Our method to update view
+        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

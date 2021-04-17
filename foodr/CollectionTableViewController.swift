@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class CollectionTableViewController: UITableViewController {
-    var restaurants: [NSManagedObject]?
+    var restaurants: [NSManagedObject] = []
     var managedObjectContext: NSManagedObjectContext!
     var appDelegate: AppDelegate!
     
@@ -26,6 +26,17 @@ class CollectionTableViewController: UITableViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        restaurants = fetchRestaurants()
+        self.tableView.reloadData()
+    }
+    
+    func update() {
+        restaurants = fetchRestaurants()
+        self.tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        restaurants = fetchRestaurants()
         self.tableView.reloadData()
     }
 
@@ -38,22 +49,21 @@ class CollectionTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return restaurants!.count
+        return restaurants.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "allRestaurantCell", for: indexPath) as! NoteTableViewCell
-        
-        //cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        
+                
         // Configure the cell...
-        let myRestaurant = restaurants![indexPath.row]
+        let myRestaurant = restaurants[indexPath.row]
         
-        cell.restaurantNameLabel?.text = myRestaurant.value(forKey: "name") as? String
+        cell.restaurantNameLabel.text = myRestaurant.value(forKey: "name") as? String
 //        cell.restaurantAddressLabel?.text = myRestaurant.value(forKey: "address") as? String
-        cell.restaurantCityLabel?.text = "• " + (myRestaurant.value(forKey: "city") as? String)!
+        cell.restaurantCityLabel.text = "• " + (myRestaurant.value(forKey: "city") as? String)!
 //        cell.restaurantStateLabel?.text = myRestaurant.value(forKey: "state") as? String
-        cell.restaurantRatingLabel?.text = "• " + (myRestaurant.value(forKey: "rating") as? Float)!.description
+        cell.restaurantRatingLabel.text = "• " + (myRestaurant.value(forKey: "rating") as? Float)!.description
+        cell.restaurantNoteTextField.text = myRestaurant.value(forKey: "note") as? String
         
         if let imageData = myRestaurant.value(forKey: "image") as? Data {
             let image = UIImage(data:imageData,scale:1.0)
@@ -83,8 +93,8 @@ class CollectionTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            let restaurant = restaurants![indexPath.row]
-            restaurants!.remove(at: indexPath.row)
+            let restaurant = restaurants[indexPath.row]
+            restaurants.remove(at: indexPath.row)
             deleteRestaurant(restaurant)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -94,7 +104,7 @@ class CollectionTableViewController: UITableViewController {
         if (segue.identifier == "getCollectionDetail") {
             let thirdVC = segue.destination as! CollectionDetailViewController
             let row = self.tableView?.indexPathForSelectedRow?.row ?? 0
-            thirdVC.tappedRestaurant = restaurants![row]
+            thirdVC.tappedRestaurant = restaurants[row]
         }
     }
     
@@ -102,5 +112,16 @@ class CollectionTableViewController: UITableViewController {
     func deleteRestaurant(_ restaurant: NSManagedObject) {
         managedObjectContext.delete(restaurant)
         appDelegate.saveContext()
+    }
+    
+    func fetchRestaurants() -> [NSManagedObject] {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Restaurant")
+        var restaurants: [NSManagedObject] = []
+        do {
+            restaurants = try self.managedObjectContext.fetch(fetchRequest)
+        } catch {
+            print("getRestaurants error: \(error)")
+        }
+        return restaurants
     }
 }

@@ -421,19 +421,35 @@
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yRh-cV-kZ3">
                                 <rect key="frame" x="20" y="637" width="374" height="160"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGs-33-iBb">
+                                <rect key="frame" x="132" y="812" width="150" height="50"/>
+                                <color key="backgroundColor" red="0.77116879549893469" green="0.47770335662097663" blue="0.52409135899576897" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="DNt-Zr-adm"/>
+                                    <constraint firstAttribute="width" constant="150" id="SfR-8i-cyI"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveNoteTapped:" destination="sAn-5H-Fsp" eventType="touchUpInside" id="FaP-pI-Cqz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hG7-DC-lDC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="yRh-cV-kZ3" firstAttribute="leading" secondItem="hG7-DC-lDC" secondAttribute="leading" constant="20" id="5Wn-xv-XK8"/>
+                            <constraint firstItem="hG7-DC-lDC" firstAttribute="bottom" secondItem="PGs-33-iBb" secondAttribute="bottom" id="9me-dj-aPc"/>
                             <constraint firstItem="vrT-FK-lLr" firstAttribute="leading" secondItem="hG7-DC-lDC" secondAttribute="leading" constant="20" id="B64-cS-yeP"/>
                             <constraint firstItem="yRh-cV-kZ3" firstAttribute="top" secondItem="ljZ-2h-tTX" secondAttribute="bottom" constant="7.5" id="DJ6-J4-Rcs"/>
+                            <constraint firstItem="PGs-33-iBb" firstAttribute="centerX" secondItem="rad-hi-F9q" secondAttribute="centerX" id="DyO-cd-jU4"/>
                             <constraint firstItem="vrT-FK-lLr" firstAttribute="top" secondItem="gCC-Pj-dau" secondAttribute="bottom" constant="20" id="Egh-I9-Dua"/>
                             <constraint firstItem="gCC-Pj-dau" firstAttribute="top" secondItem="hG7-DC-lDC" secondAttribute="top" constant="20" id="H4B-XE-Bhl"/>
                             <constraint firstItem="6Yv-LE-Spr" firstAttribute="top" secondItem="hNA-VD-DUS" secondAttribute="bottom" constant="10" id="JEf-xg-XLL"/>
@@ -457,6 +473,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="K1P-zh-N2a"/>
                     <connections>
+                        <outlet property="addNoteButton" destination="PGs-33-iBb" id="Htc-R8-xFo"/>
                         <outlet property="restaurantAddressLabel" destination="hNA-VD-DUS" id="U2R-7T-0om"/>
                         <outlet property="restaurantCityLabel" destination="6Yv-LE-Spr" id="2j4-JI-oRA"/>
                         <outlet property="restaurantImageView" destination="gCC-Pj-dau" id="5vf-2f-bpT"/>
@@ -787,6 +804,9 @@
         <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
