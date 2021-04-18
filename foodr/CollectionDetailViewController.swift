@@ -112,7 +112,7 @@ class CollectionDetailViewController: UIViewController, UITextFieldDelegate {
         appDelegate.saveContext()
     }
     
-    func initializeView() {
+    func initializeView() {	
         restaurantImageView?.contentMode = .scaleAspectFill
         restaurantImageView?.layer.cornerRadius = 10
         restaurantImageView?.layer.masksToBounds = true

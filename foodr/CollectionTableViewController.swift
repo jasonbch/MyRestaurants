@@ -59,11 +59,15 @@ class CollectionTableViewController: UITableViewController {
         let myRestaurant = restaurants[indexPath.row]
         
         cell.restaurantNameLabel.text = myRestaurant.value(forKey: "name") as? String
-//        cell.restaurantAddressLabel?.text = myRestaurant.value(forKey: "address") as? String
         cell.restaurantCityLabel.text = "• " + (myRestaurant.value(forKey: "city") as? String)!
 //        cell.restaurantStateLabel?.text = myRestaurant.value(forKey: "state") as? String
         cell.restaurantRatingLabel.text = "• " + (myRestaurant.value(forKey: "rating") as? Float)!.description
-        cell.restaurantNoteTextField.text = myRestaurant.value(forKey: "note") as? String
+        let note = myRestaurant.value(forKey: "note") as? String
+        if (note == "") {
+            cell.restaurantNoteTextField.text = "Add a note"
+        } else {
+            cell.restaurantNoteTextField.text = myRestaurant.value(forKey: "note") as? String
+        }
         
         if let imageData = myRestaurant.value(forKey: "image") as? Data {
             let image = UIImage(data:imageData,scale:1.0)
