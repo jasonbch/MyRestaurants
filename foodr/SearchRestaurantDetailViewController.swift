@@ -22,6 +22,7 @@ class SearchRestaurantDetailViewController: UIViewController {
     @IBOutlet weak var restaurantRatingLabel: UILabel!
     @IBOutlet weak var restaurantNoteLabel: UILabel!
     @IBOutlet weak var addToCollectionButton: UIButton!
+    @IBOutlet weak var restaurantNoteTextField: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,9 +68,14 @@ class SearchRestaurantDetailViewController: UIViewController {
             let city = myRestaurant.city
             let state = myRestaurant.state
             let id = myRestaurant.id
-            let note = myRestaurant.note
+            let myNote: String
+            if let note = restaurantNoteTextField.text {
+                myNote = note
+            } else {
+                myNote = ""
+            }
             
-            insertRestaurant(name: name, address: address, city: city, state: state, rating: rating, image: image, id: id, note: note)
+            insertRestaurant(name: name, address: address, city: city, state: state, rating: rating, image: image, id: id, note: myNote)
         }
     }
     

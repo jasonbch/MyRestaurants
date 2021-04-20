@@ -30,6 +30,8 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
         restaurants.removeAll()
         managedObjectContext.reset()
         searchButtonTappedHelper()
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
+        tableView.separatorColor = UIColor.gray
     }
     
     func searchButtonTappedHelper() {
