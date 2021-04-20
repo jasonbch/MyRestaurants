@@ -10,7 +10,7 @@ import CoreData
 
 class SearchRestaurantDetailViewController: UIViewController {
 
-    var tappedRestaurant: NSManagedObject?
+    var tappedRestaurant: TempRestaurant?
     var managedObjectContext: NSManagedObjectContext!
     var appDelegate: AppDelegate!
     
@@ -31,14 +31,14 @@ class SearchRestaurantDetailViewController: UIViewController {
         managedObjectContext = appDelegate.persistentContainer.viewContext
         
         if let myRestaurant = tappedRestaurant {
-            restaurantNameLabel?.text = myRestaurant.value(forKey: "name") as? String
-            restaurantAddressLabel?.text = myRestaurant.value(forKey: "address") as? String
-            restaurantCityLabel?.text = myRestaurant.value(forKey: "city") as? String
-            restaurantStateLabel?.text = myRestaurant.value(forKey: "state") as? String
-            restaurantRatingLabel?.text = "Rating: " + (myRestaurant.value(forKey: "rating") as? Float)!.description
+            restaurantNameLabel?.text = myRestaurant.name
+            restaurantAddressLabel?.text = myRestaurant.address
+            restaurantCityLabel?.text = myRestaurant.city
+            restaurantStateLabel?.text = myRestaurant.state
+            restaurantRatingLabel?.text = "Rating: " + myRestaurant.rating.description
             restaurantNoteLabel?.text = "Note: "
             
-            if let imageData = myRestaurant.value(forKey: "image") as? Data {
+            if let imageData = myRestaurant.image {
                 let image = UIImage(data:imageData, scale:1.0)
                 restaurantImageView?.image = image
             } else {
@@ -60,14 +60,14 @@ class SearchRestaurantDetailViewController: UIViewController {
     
     @IBAction func addToCollectionButtonTapped(_ sender: UIButton) {
         if let myRestaurant = tappedRestaurant {
-            let name = myRestaurant.value(forKey: "name") as? String
-            let rating = myRestaurant.value(forKey: "rating") as? Float
-            let image = myRestaurant.value(forKey: "image") as? Data
-            let address = myRestaurant.value(forKey: "address") as? String
-            let city = myRestaurant.value(forKey: "city") as? String
-            let state = myRestaurant.value(forKey: "state") as? String
-            let id = myRestaurant.value(forKey: "id") as? String
-            let note = myRestaurant.value(forKey: "note") as? String
+            let name = myRestaurant.name
+            let rating = myRestaurant.rating
+            let image = myRestaurant.image
+            let address = myRestaurant.address
+            let city = myRestaurant.city
+            let state = myRestaurant.state
+            let id = myRestaurant.id
+            let note = myRestaurant.note
             
             insertRestaurant(name: name, address: address, city: city, state: state, rating: rating, image: image, id: id, note: note)
         }

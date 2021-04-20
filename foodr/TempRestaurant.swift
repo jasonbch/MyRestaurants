@@ -14,7 +14,7 @@ class TempRestaurant {
     var state: String
     var rating: Float
     var id: String
-    var image: Data
+    var image: Data?
     var note: String?
     
     init(name: String,
@@ -23,7 +23,7 @@ class TempRestaurant {
          city: String,
          state: String,
          rating: Float,
-         image: Data,
+         image: Data? = nil,
          note: String = "") {
         self.name = name
         self.id = id
@@ -31,7 +31,9 @@ class TempRestaurant {
         self.city = city
         self.state = state
         self.rating = rating
-        self.image = image
+        if let imageData = image {
+            self.image = imageData
+        }
         self.note = note
     }
 }

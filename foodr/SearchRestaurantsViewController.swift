@@ -16,7 +16,7 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
     
     var apikey = "DlcWTI3TX1aQ1YVxDh4Xck60DUING0H78NWFRTUXixFvoVZ1x-peHCjzcNrVhV-VuISrxvXsH8Fek0k8-KSZVGIX1WxQo2zGSHgWdEYA_fftHU3TuttNPdCaXl2ZXHYx"
     
-    var restaurants: [NSManagedObject] = []
+    var restaurants: [TempRestaurant] = []
     var managedObjectContext: NSManagedObjectContext!
     var appDelegate: AppDelegate!
     
@@ -100,14 +100,7 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
                     let state = location?["state"] as? String
                     let id = currentRestaurant["id"] as? String
                     
-                    let restaurant = NSEntityDescription.insertNewObject(forEntityName:
-                    "Restaurant", into: self.managedObjectContext)
-                    restaurant.setValue(name, forKey: "name")
-                    restaurant.setValue(address, forKey: "address")
-                    restaurant.setValue(rating, forKey: "rating")
-                    restaurant.setValue(id, forKey: "id")
-                    restaurant.setValue(city, forKey: "city")
-                    restaurant.setValue(state, forKey: "state")
+                    let restaurant = TempRestaurant(name: name!, id: id!, address: address!, city: city!, state: state!, rating: rating!)
                     
                     restaurants.append(restaurant)
                     
@@ -131,19 +124,14 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
                     if let imageData = data {
                         let image = UIImage(data: imageData)?.pngData()
                         
-                        let filter = searchID
-                        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Restaurant")
-                        fetchRequest.predicate = NSPredicate(format: "id == %@", filter)
+                        let filteredRestaurant = self.restaurants.filter { restaurant in
+                            return restaurant.id == searchID
+                        }
                         
-                        do {
-                            let fetchedRestaurant = try self.managedObjectContext.fetch(fetchRequest) as! [Restaurant]
-                            
-                            DispatchQueue.main.async {
-                                fetchedRestaurant[0].setValue(image, forKey: "image")
-                                self.tableView.reloadData()
-                            }
-                        } catch {
-                            fatalError("Failed to fetch restaurant: \(error)")
+                        filteredRestaurant[0].image = image
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
                         }
                     }
                 })
@@ -176,13 +164,13 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
         // Configure the cell...
         let myRestaurant = restaurants[indexPath.row]
         
-        cell.restaurantNameLabel?.text = myRestaurant.value(forKey: "name") as? String
-        cell.restaurantAddressLabel?.text = myRestaurant.value(forKey: "address") as? String
-        cell.restaurantCityLabel?.text = myRestaurant.value(forKey: "city") as? String
-        cell.restaurantStateLabel?.text = myRestaurant.value(forKey: "state") as? String
-        cell.restaurantRatingLabel?.text = "Rating: " + (myRestaurant.value(forKey: "rating") as? Float)!.description
+        cell.restaurantNameLabel?.text = myRestaurant.name
+        cell.restaurantAddressLabel?.text = myRestaurant.address
+        cell.restaurantCityLabel?.text = myRestaurant.city
+        cell.restaurantStateLabel?.text = myRestaurant.state
+        cell.restaurantRatingLabel?.text = "Rating: " + myRestaurant.rating.description
         
-        if let imageData = myRestaurant.value(forKey: "image") as? Data {
+        if let imageData = myRestaurant.image {
             let image = UIImage(data:imageData,scale:1.0)
             cell.restaurantImageView?.image = image ?? UIImage(named: "default-image.jpg")
         } else {
