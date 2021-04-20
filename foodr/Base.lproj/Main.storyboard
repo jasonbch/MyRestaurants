@@ -504,10 +504,10 @@
             </objects>
             <point key="canvasLocation" x="2528.985507246377" y="-19.419642857142858"/>
         </scene>
-        <!--View Controller-->
+        <!--Get Random Restaurant-->
         <scene sceneID="GEH-ay-qsW">
             <objects>
-                <viewController id="Xqy-by-8n7" sceneMemberID="viewController">
+                <viewController id="Xqy-by-8n7" customClass="GetRandomRestaurant" customModule="foodr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cdj-aB-Sbk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -522,6 +522,9 @@
                                 <state key="normal" title="Reroll">
                                     <color key="titleColor" red="0.53399300579999998" green="0.278072983" blue="0.25402694939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="zimzalabimButtonTapped:" destination="Xqy-by-8n7" eventType="touchUpInside" id="kSQ-Zd-RXh"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The restaurant you should to go is:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAd-bn-0n8">
                                 <rect key="frame" x="40" y="108" width="334" height="88.5"/>
@@ -535,16 +538,28 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lynnwood, WA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXl-cD-VSB">
-                                <rect key="frame" x="40" y="346.5" width="235" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXl-cD-VSB">
+                                <rect key="frame" x="40" y="346.5" width="64" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <color key="textColor" red="1" green="0.70726269480000004" blue="0.63422900439999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGT-7A-qw6">
+                                <rect key="frame" x="40" y="216.5" width="95" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <color key="textColor" red="0.79604440929999998" green="0.61140728" blue="0.58375424149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Muto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGT-7A-qw6">
-                                <rect key="frame" x="40" y="216.5" width="82" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VL9-gM-6fb">
+                                <rect key="frame" x="109" y="346.5" width="8" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
-                                <color key="textColor" red="0.79604440929999998" green="0.61140728" blue="0.58375424149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cf6-d4-fhI">
+                                <rect key="frame" x="132" y="346.5" width="83" height="44.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -553,6 +568,7 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Laj-3c-OqG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TGT-7A-qw6" secondAttribute="trailing" symbolic="YES" id="3DP-IG-YkN"/>
+                            <constraint firstItem="Cf6-d4-fhI" firstAttribute="top" secondItem="Ahl-3w-vxY" secondAttribute="bottom" constant="20" id="655-GO-drl"/>
                             <constraint firstItem="UvE-HB-OhR" firstAttribute="centerY" secondItem="cdj-aB-Sbk" secondAttribute="centerY" id="6P6-O4-uMK"/>
                             <constraint firstItem="jXl-cD-VSB" firstAttribute="leading" secondItem="Laj-3c-OqG" secondAttribute="leading" constant="40" id="BiJ-Ml-si3"/>
                             <constraint firstItem="UvE-HB-OhR" firstAttribute="centerX" secondItem="cdj-aB-Sbk" secondAttribute="centerX" id="Cg7-yX-Pm5"/>
@@ -563,12 +579,21 @@
                             <constraint firstItem="TGT-7A-qw6" firstAttribute="top" secondItem="yAd-bn-0n8" secondAttribute="bottom" constant="20" id="aFr-d4-2m9"/>
                             <constraint firstItem="Laj-3c-OqG" firstAttribute="trailing" secondItem="yAd-bn-0n8" secondAttribute="trailing" constant="40" id="dXY-lI-yeu"/>
                             <constraint firstItem="TGT-7A-qw6" firstAttribute="leading" secondItem="Laj-3c-OqG" secondAttribute="leading" constant="40" id="fHe-uT-YiW"/>
+                            <constraint firstItem="Cf6-d4-fhI" firstAttribute="leading" secondItem="VL9-gM-6fb" secondAttribute="trailing" constant="15" id="gVy-PU-mBN"/>
                             <constraint firstItem="yAd-bn-0n8" firstAttribute="top" secondItem="Laj-3c-OqG" secondAttribute="top" constant="20" id="rra-Lx-9cW"/>
                             <constraint firstItem="Laj-3c-OqG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jXl-cD-VSB" secondAttribute="trailing" symbolic="YES" id="u5f-sb-PXK"/>
+                            <constraint firstItem="VL9-gM-6fb" firstAttribute="top" secondItem="Ahl-3w-vxY" secondAttribute="bottom" constant="20" id="vrb-Jb-Ces"/>
+                            <constraint firstItem="VL9-gM-6fb" firstAttribute="leading" secondItem="jXl-cD-VSB" secondAttribute="trailing" constant="5" id="xR5-Lf-qj2"/>
                             <constraint firstItem="jXl-cD-VSB" firstAttribute="top" secondItem="Ahl-3w-vxY" secondAttribute="bottom" constant="20" id="xR6-um-fT4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mPQ-ME-euf"/>
+                    <connections>
+                        <outlet property="ZimzalabimButton" destination="UvE-HB-OhR" id="9rQ-XG-pBy"/>
+                        <outlet property="restaurantCityLabel" destination="jXl-cD-VSB" id="Aqd-p1-q4D"/>
+                        <outlet property="restaurantNameLabel" destination="TGT-7A-qw6" id="DPQ-Pu-9By"/>
+                        <outlet property="restaurantStateLabel" destination="Cf6-d4-fhI" id="beS-qS-flC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kvx-zp-FgE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
