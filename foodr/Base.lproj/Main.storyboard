@@ -599,12 +599,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UvE-HB-OhR">
-                                <rect key="frame" x="162" y="433" width="90" height="30"/>
+                                <rect key="frame" x="132" y="423" width="150" height="50"/>
                                 <color key="backgroundColor" red="0.79604440929999998" green="0.61140728" blue="0.58375424149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="PdJ-rc-g0A"/>
-                                    <constraint firstAttribute="width" constant="90" id="VIt-zv-0iG"/>
+                                    <constraint firstAttribute="height" constant="50" id="PdJ-rc-g0A"/>
+                                    <constraint firstAttribute="width" constant="150" id="VIt-zv-0iG"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Zimzalabim">
                                     <color key="titleColor" red="0.53399300579999998" green="0.278072983" blue="0.25402694939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>

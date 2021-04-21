@@ -102,7 +102,12 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
                     let state = location?["state"] as? String
                     let id = currentRestaurant["id"] as? String
                     
-                    let restaurant = TempRestaurant(name: name!, id: id!, address: address!, city: city!, state: state!, rating: rating!)
+                    let restaurant = TempRestaurant(name: name ?? "Default",
+                                                    id: id ?? "Default",
+                                                    address: address ?? "Default",
+                                                    city: city ?? "Default",
+                                                    state: state ?? "Default",
+                                                    rating: rating ?? 0)
                     
                     restaurants.append(restaurant)
                     
