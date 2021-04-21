@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class CollectionTableViewController: UITableViewController {
-    var restaurants: [NSManagedObject] = []
+    var restaurants: [NSManagedObject]?
     var managedObjectContext: NSManagedObjectContext!
     var appDelegate: AppDelegate!
     
@@ -21,22 +21,20 @@ class CollectionTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.tableView.removeFromSuperview()
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         managedObjectContext = appDelegate.persistentContainer.viewContext
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        restaurants = fetchRestaurants()
         self.tableView.reloadData()
     }
     
     func update() {
-        restaurants = fetchRestaurants()
         self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        restaurants = fetchRestaurants()
         self.tableView.reloadData()
     }
 
@@ -49,14 +47,14 @@ class CollectionTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return restaurants.count
+        return restaurants!.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "allRestaurantCell", for: indexPath) as! NoteTableViewCell
                 
         // Configure the cell...
-        let myRestaurant = restaurants[indexPath.row]
+        let myRestaurant = restaurants![indexPath.row]
         
         cell.restaurantNameLabel.text = myRestaurant.value(forKey: "name") as? String
         cell.restaurantCityLabel.text = "• " + (myRestaurant.value(forKey: "city") as? String)!
@@ -64,7 +62,7 @@ class CollectionTableViewController: UITableViewController {
         cell.restaurantRatingLabel.text = "• " + (myRestaurant.value(forKey: "rating") as? Float)!.description
         let note = myRestaurant.value(forKey: "note") as? String
         if (note == "") {
-            cell.restaurantNoteTextField.text = "Add a note"
+            cell.restaurantNoteTextField.text = "Add a note..."
         } else {
             cell.restaurantNoteTextField.text = myRestaurant.value(forKey: "note") as? String
         }
@@ -97,8 +95,8 @@ class CollectionTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            let restaurant = restaurants[indexPath.row]
-            restaurants.remove(at: indexPath.row)
+            let restaurant = restaurants![indexPath.row]
+            restaurants!.remove(at: indexPath.row)
             deleteRestaurant(restaurant)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -108,7 +106,15 @@ class CollectionTableViewController: UITableViewController {
         if (segue.identifier == "getCollectionDetail") {
             let thirdVC = segue.destination as! CollectionDetailViewController
             let row = self.tableView?.indexPathForSelectedRow?.row ?? 0
-            thirdVC.tappedRestaurant = restaurants[row]
+            thirdVC.tappedRestaurant = restaurants![row]
+        }
+    }
+    
+    // Add the new quote to the list
+    @IBAction func unwindFromCollectionDetailViewController(sender: UIStoryboardSegue) {
+        if sender.identifier == "unwindFromCollectionDetail" {
+            //let secondVC = sender.source as! CollectionDetailViewController
+            self.tableView.reloadData()
         }
     }
     

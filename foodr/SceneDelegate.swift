@@ -44,6 +44,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let mainTVC = navController.topViewController as? CollectionTableViewController {
             mainTVC.update() // Our method to update view
         }
+        
+        if let anotherTVC = navController.topViewController as? MainViewController {
+            anotherTVC.update() // Our method to update view
+        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

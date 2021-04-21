@@ -24,6 +24,16 @@ class SearchRestaurantDetailViewController: UIViewController {
     @IBOutlet weak var addToCollectionButton: UIButton!
     @IBOutlet weak var restaurantNoteTextField: UITextView!
     
+    @IBOutlet weak var dessertButton: UIButton!
+    @IBOutlet weak var drinkButton: UIButton!
+    @IBOutlet weak var foodButton: UIButton!
+    
+    var isFood: Bool = false
+    var isDrink: Bool = false
+    var isDessert: Bool = false
+    
+    var category: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,7 +46,7 @@ class SearchRestaurantDetailViewController: UIViewController {
             restaurantAddressLabel?.text = myRestaurant.address
             restaurantCityLabel?.text = myRestaurant.city
             restaurantStateLabel?.text = myRestaurant.state
-            restaurantRatingLabel?.text = "Rating: " + myRestaurant.rating.description
+            restaurantRatingLabel?.text = myRestaurant.rating.description + "⭐"
             restaurantNoteLabel?.text = "Note: "
             
             if let imageData = myRestaurant.image {
@@ -57,6 +67,24 @@ class SearchRestaurantDetailViewController: UIViewController {
         
         addToCollectionButton.layer.cornerRadius = 4
         addToCollectionButton.layer.masksToBounds = true
+        
+        foodButton.backgroundColor = .clear
+        foodButton.layer.cornerRadius = 5
+        foodButton.layer.borderWidth = 1
+        foodButton.layer.borderColor = UIColor.systemGray5.cgColor
+        foodButton.setTitleColor(UIColor.systemGray4, for: .normal)
+        
+        drinkButton.backgroundColor = .clear
+        drinkButton.layer.cornerRadius = 5
+        drinkButton.layer.borderWidth = 1
+        drinkButton.layer.borderColor = UIColor.systemGray4.cgColor
+        drinkButton.setTitleColor(UIColor.systemGray4, for: .normal)
+        
+        dessertButton.backgroundColor = .clear
+        dessertButton.layer.cornerRadius = 5
+        dessertButton.layer.borderWidth = 1
+        dessertButton.layer.borderColor = UIColor.systemGray4.cgColor
+        dessertButton.setTitleColor(UIColor.systemGray4, for: .normal)
     }
     
     @IBAction func addToCollectionButtonTapped(_ sender: UIButton) {
@@ -75,7 +103,53 @@ class SearchRestaurantDetailViewController: UIViewController {
                 myNote = ""
             }
             
-            insertRestaurant(name: name, address: address, city: city, state: state, rating: rating, image: image, id: id, note: myNote)
+            if isFood {
+                category.append("Food")
+            }
+            if isDrink {
+                category.append("Drink")
+            }
+            if isDessert {
+                category.append("Dessert")
+            }
+            
+            insertRestaurant(name: name, address: address, city: city, state: state, rating: rating, image: image, id: id, note: myNote, category: category)
+        }
+    }
+    
+    @IBAction func foodButtonTapped(_ sender: UIButton) {
+        isFood = !isFood
+        
+        if isFood {
+            foodButton.layer.borderColor = UIColor.black.cgColor
+            foodButton.setTitleColor(UIColor.black, for: .normal)
+        } else {
+            foodButton.layer.borderColor = UIColor.systemGray4.cgColor
+            foodButton.setTitleColor(UIColor.systemGray4, for: .normal)
+        }
+    }
+    
+    @IBAction func drinkButtonTapped(_ sender: UIButton) {
+        isDrink = !isDrink
+        
+        if isDrink {
+            drinkButton.layer.borderColor = UIColor.black.cgColor
+            drinkButton.setTitleColor(UIColor.black, for: .normal)
+        } else {
+            drinkButton.layer.borderColor = UIColor.systemGray4.cgColor
+            drinkButton.setTitleColor(UIColor.systemGray4, for: .normal)
+        }
+    }
+    
+    @IBAction func dessertButtonTapped(_ sender: UIButton) {
+        isDessert = !isDessert
+        
+        if isDessert {
+            dessertButton.layer.borderColor = UIColor.black.cgColor
+            dessertButton.setTitleColor(UIColor.black, for: .normal)
+        } else {
+            dessertButton.layer.borderColor = UIColor.systemGray4.cgColor
+            dessertButton.setTitleColor(UIColor.systemGray4, for: .normal)
         }
     }
     
@@ -86,7 +160,8 @@ class SearchRestaurantDetailViewController: UIViewController {
                           rating: Float?,
                           image: Data?,
                           id: String?,
-                          note: String?) {
+                          note: String?,
+                          category: [String]?) {
         let restaurant = NSEntityDescription.insertNewObject(forEntityName:
         "Restaurant", into: self.managedObjectContext)
         restaurant.setValue(name, forKey: "name")
@@ -97,6 +172,7 @@ class SearchRestaurantDetailViewController: UIViewController {
         restaurant.setValue(city, forKey: "city")
         restaurant.setValue(state, forKey: "state")
         restaurant.setValue(note, forKey: "note")
+        restaurant.setValue(category, forKey: "category")
         appDelegate.saveContext() // In AppDelegate.swift
     }
 }

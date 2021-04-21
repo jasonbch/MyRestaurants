@@ -22,14 +22,23 @@ class CollectionDetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var restaurantTextView: UITextView!
     @IBOutlet weak var addNoteButton: UIButton!
     
+    @IBOutlet weak var foodButton: UIButton!
+    @IBOutlet weak var drinkButton: UIButton!
+    @IBOutlet weak var dessertButton: UIButton!
+    
+    var isFood: Bool = false
+    var isDrink: Bool = false
+    var isDessert: Bool = false
+    
+    var categories: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        //TitleTextField.delegate = self
-        //AddressTextField.delegate = self
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         managedObjectContext = appDelegate.persistentContainer.viewContext
+        
+        initializeView()
         
         if let myRestaurant = tappedRestaurant {
             restaurantNameLabel?.text = myRestaurant.value(forKey: "name") as? String
@@ -37,7 +46,43 @@ class CollectionDetailViewController: UIViewController, UITextFieldDelegate {
             restaurantCityLabel?.text = myRestaurant.value(forKey: "city") as? String
             restaurantStateLabel?.text = myRestaurant.value(forKey: "state") as? String
             restaurantRatingLabel?.text = (myRestaurant.value(forKey: "rating") as? Float)!.description
-            restaurantTextView?.text = myRestaurant.value(forKey: "note") as? String
+            if let myNote = myRestaurant.value(forKey: "note") as? String {
+                if (myNote == "") {
+                    restaurantTextView?.text = "Add a note..."
+                } else {
+                    restaurantTextView?.text = myNote
+                }
+            }
+            
+            if let categories = myRestaurant.value(forKey: "category") as? [String] {
+                if categories.contains("Food") {
+                    isFood = true;
+                    foodButton.layer.borderColor = UIColor.black.cgColor
+                    foodButton.setTitleColor(UIColor.black, for: .normal)
+                } else {
+                    isFood = false;
+                    foodButton.layer.borderColor = UIColor.systemGray4.cgColor
+                    foodButton.setTitleColor(UIColor.systemGray4, for: .normal)
+                }
+                if categories.contains("Drink") {
+                    isDrink = true;
+                    drinkButton.layer.borderColor = UIColor.black.cgColor
+                    drinkButton.setTitleColor(UIColor.black, for: .normal)
+                } else {
+                    isDrink = false;
+                    drinkButton.layer.borderColor = UIColor.systemGray4.cgColor
+                    drinkButton.setTitleColor(UIColor.systemGray4, for: .normal)
+                }
+                if categories.contains("Dessert") {
+                    isDessert = true;
+                    dessertButton.layer.borderColor = UIColor.black.cgColor
+                    dessertButton.setTitleColor(UIColor.black, for: .normal)
+                } else {
+                    isDessert = false;
+                    dessertButton.layer.borderColor = UIColor.systemGray4.cgColor
+                    dessertButton.setTitleColor(UIColor.systemGray4, for: .normal)
+                }
+            }
             
             if let imageData = myRestaurant.value(forKey: "image") as? Data {
                 let image = UIImage(data:imageData, scale:1.0)
@@ -46,82 +91,99 @@ class CollectionDetailViewController: UIViewController, UITextFieldDelegate {
                 restaurantImageView?.image = UIImage(named: "default-image.jpg")
             }
         }
-        
-        initializeView()
     }
     
-    @IBAction func saveNoteTapped(_ sender: UIButton) {
+    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
         saveTapped()
+        performSegue(withIdentifier: "unwindFromCollectionDetail", sender: nil)
+
+    }
+    
+    @IBAction func cancelTapped(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "unwindFromCollectionDetail", sender: nil)
     }
     
     // Save the new quotation
     func saveTapped() {
         if let myRestaurant = tappedRestaurant {
+            if isFood {
+                categories.append("Food")
+            }
+            if isDrink {
+                categories.append("Drink")
+            }
+            if isDessert {
+                categories.append("Dessert")
+            }
             
-            let name = myRestaurant.value(forKey: "name") as? String
-            let rating = myRestaurant.value(forKey: "rating") as? Float
-            let image = myRestaurant.value(forKey: "image") as? Data
-            let address = myRestaurant.value(forKey: "address") as? String
-            let city = myRestaurant.value(forKey: "city") as? String
-            let state = myRestaurant.value(forKey: "state") as? String
-            let id = myRestaurant.value(forKey: "id") as? String
-            let note = restaurantTextView.text
-            
-            let newRestaurant = insertRestaurant(name: name,
-                             address: address,
-                             city: city,
-                             state: state,
-                             rating: rating,
-                             image: image,
-                             id: id,
-                             note: note)
-            // Replace the restaurant
-            tappedRestaurant = newRestaurant
-            
-            // Delete the old restaurant
-            deleteRestaurant(myRestaurant)
-            
+            // Set value
+            myRestaurant.setValue(restaurantTextView.text, forKey: "Note")
+            myRestaurant.setValue(categories, forKey: "category")
+            appDelegate.saveContext()
         }
     }
     
-    func insertRestaurant(name: String?,
-                          address: String?,
-                          city: String?,
-                          state: String?,
-                          rating: Float?,
-                          image: Data?,
-                          id: String?,
-                          note: String?) -> NSManagedObject {
-        let restaurant = NSEntityDescription.insertNewObject(forEntityName:
-        "Restaurant", into: self.managedObjectContext)
-        restaurant.setValue(name, forKey: "name")
-        restaurant.setValue(address, forKey: "address")
-        restaurant.setValue(rating, forKey: "rating")
-        restaurant.setValue(image, forKey: "image")
-        restaurant.setValue(id, forKey: "id")
-        restaurant.setValue(city, forKey: "city")
-        restaurant.setValue(state, forKey: "state")
-        restaurant.setValue(note, forKey: "note")
-        appDelegate.saveContext() // In AppDelegate.swift
+    @IBAction func foodButtonTapped(_ sender: UIButton) {
+        isFood = !isFood
         
-        return restaurant
+        if isFood {
+            foodButton.layer.borderColor = UIColor.black.cgColor
+            foodButton.setTitleColor(UIColor.black, for: .normal)
+        } else {
+            foodButton.layer.borderColor = UIColor.systemGray4.cgColor
+            foodButton.setTitleColor(UIColor.systemGray4, for: .normal)
+        }
     }
     
-    func deleteRestaurant(_ restaurant: NSManagedObject) {
-        managedObjectContext.delete(restaurant)
-        appDelegate.saveContext()
+    @IBAction func drinkButtonTapped(_ sender: UIButton) {
+        isDrink = !isDrink
+        
+        if isDrink {
+            drinkButton.layer.borderColor = UIColor.black.cgColor
+            drinkButton.setTitleColor(UIColor.black, for: .normal)
+        } else {
+            drinkButton.layer.borderColor = UIColor.systemGray4.cgColor
+            drinkButton.setTitleColor(UIColor.systemGray4, for: .normal)
+        }
     }
     
+    @IBAction func dessertButtonTapped(_ sender: UIButton) {
+        isDessert = !isDessert
+        
+        if isDessert {
+            dessertButton.layer.borderColor = UIColor.black.cgColor
+            dessertButton.setTitleColor(UIColor.black, for: .normal)
+        } else {
+            dessertButton.layer.borderColor = UIColor.systemGray4.cgColor
+            dessertButton.setTitleColor(UIColor.systemGray4, for: .normal)
+        }
+    }
+        
     func initializeView() {	
         restaurantImageView?.contentMode = .scaleAspectFill
         restaurantImageView?.layer.cornerRadius = 10
         restaurantImageView?.layer.masksToBounds = true
         
-        addNoteButton.layer.cornerRadius = 4
-        addNoteButton.layer.masksToBounds = true
-        
         restaurantTextView.layer.cornerRadius = 4
         restaurantTextView.layer.masksToBounds = true
+        
+        foodButton.backgroundColor = .clear
+        foodButton.layer.cornerRadius = 5
+        foodButton.layer.borderWidth = 1
+        foodButton.layer.borderColor = UIColor.systemGray4.cgColor
+        foodButton.setTitleColor(UIColor.systemGray4, for: .normal)
+        
+        drinkButton.backgroundColor = .clear
+        drinkButton.layer.cornerRadius = 5
+        drinkButton.layer.borderWidth = 1
+        drinkButton.layer.borderColor = UIColor.systemGray4.cgColor
+        drinkButton.setTitleColor(UIColor.systemGray4, for: .normal)
+        
+        dessertButton.backgroundColor = .clear
+        dessertButton.layer.cornerRadius = 5
+        dessertButton.layer.borderWidth = 1
+        dessertButton.layer.borderColor = UIColor.systemGray4.cgColor
+        dessertButton.setTitleColor(UIColor.systemGray4, for: .normal)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

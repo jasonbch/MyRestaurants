@@ -35,6 +35,16 @@ class MainViewController: UIViewController {
         restaurants = fetchRestaurants()
     }
     
+    func update() {
+        appDelegate = UIApplication.shared.delegate as? AppDelegate
+        managedObjectContext = appDelegate.persistentContainer.viewContext
+        restaurants = fetchRestaurants()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        restaurants = fetchRestaurants()
+    }
+    
     func insertRestaurant(name: String, address: String, rating: Float?, image: UIImage?, id: String) -> NSManagedObject {
         let restaurant = NSEntityDescription.insertNewObject(forEntityName:
         "Restaurant", into: self.managedObjectContext)
@@ -95,6 +105,18 @@ class MainViewController: UIViewController {
         if (segue.identifier == "getAllRestaurants") {
             let secondVC = segue.destination as! CollectionTableViewController
             secondVC.restaurants = restaurants
+        } else if (segue.identifier == "getFood") {
+            let secondVC = segue.destination as! CollectionTableViewController
+            let foodPlaces = getType(type: "Food")
+            secondVC.restaurants = foodPlaces
+        } else if (segue.identifier == "getDrink") {
+            let secondVC = segue.destination as! CollectionTableViewController
+            let drinkPlaces = getType(type: "Drink")
+            secondVC.restaurants = drinkPlaces
+        } else if (segue.identifier == "getDessert") {
+            let secondVC = segue.destination as! CollectionTableViewController
+            let dessertPlaces = getType(type: "Dessert")
+            secondVC.restaurants = dessertPlaces
         }
     }
     
@@ -113,6 +135,19 @@ class MainViewController: UIViewController {
                 //self.tableView.reloadData()
             }
         }
+    }
+    
+    func getType(type: String) -> [NSManagedObject] {
+        var tempRestaurant: [NSManagedObject] = []
+        
+        for restaurant in restaurants {
+            if let categories = restaurant.value(forKey: "category") as? [String] {
+                if categories.contains(type) {
+                    tempRestaurant.append(restaurant)
+                }
+            }
+        }
+        return tempRestaurant
     }
 }
 
