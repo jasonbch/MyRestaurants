@@ -31,7 +31,7 @@
                                     <action selector="searchButtonTapped:" destination="lId-aU-AAB" eventType="touchUpInside" id="ebx-PD-RQF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jgi-hi-pHB">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sushi, Japanese, plate, etc." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jgi-hi-pHB">
                                 <rect key="frame" x="10" y="98" width="304" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="pLc-dH-Wcy"/>
@@ -40,7 +40,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HbJ-NG-Us6">
-                                <rect key="frame" x="0.0" y="148" width="414" height="714"/>
+                                <rect key="frame" x="0.0" y="196" width="414" height="666"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -129,12 +129,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Current Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YeH-Dt-0Ny">
+                                <rect key="frame" x="10" y="146" width="304" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="rg6-vq-jQs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h3X-p9-ktV"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="HbJ-NG-Us6" firstAttribute="top" secondItem="YeH-Dt-0Ny" secondAttribute="bottom" constant="10" id="3Di-Z0-L9Y"/>
+                            <constraint firstItem="JAn-h8-8LA" firstAttribute="leading" secondItem="YeH-Dt-0Ny" secondAttribute="trailing" constant="10" id="3Er-Yh-92A"/>
                             <constraint firstItem="JAn-h8-8LA" firstAttribute="top" secondItem="h3X-p9-ktV" secondAttribute="top" constant="10" id="C02-z6-cK4"/>
-                            <constraint firstItem="HbJ-NG-Us6" firstAttribute="top" secondItem="jgi-hi-pHB" secondAttribute="bottom" constant="10" id="DIg-xk-Law"/>
+                            <constraint firstItem="YeH-Dt-0Ny" firstAttribute="leading" secondItem="h3X-p9-ktV" secondAttribute="leading" constant="10" id="Hbv-Fs-GsX"/>
+                            <constraint firstItem="YeH-Dt-0Ny" firstAttribute="top" secondItem="jgi-hi-pHB" secondAttribute="bottom" constant="8" symbolic="YES" id="SpK-Za-lFj"/>
                             <constraint firstItem="h3X-p9-ktV" firstAttribute="bottom" secondItem="HbJ-NG-Us6" secondAttribute="bottom" id="U4Q-WA-COE"/>
                             <constraint firstItem="jgi-hi-pHB" firstAttribute="leading" secondItem="h3X-p9-ktV" secondAttribute="leading" constant="10" id="VFl-uX-fgy"/>
                             <constraint firstItem="HbJ-NG-Us6" firstAttribute="leading" secondItem="h3X-p9-ktV" secondAttribute="leading" id="WlE-Gg-MsE"/>
@@ -146,6 +157,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="7Su-9Q-oXj"/>
                     <connections>
+                        <outlet property="searchAddressTextField" destination="YeH-Dt-0Ny" id="y69-Ve-JAG"/>
                         <outlet property="searchButton" destination="JAn-h8-8LA" id="FDj-9W-XAc"/>
                         <outlet property="searchTextField" destination="jgi-hi-pHB" id="erW-FE-SS9"/>
                         <outlet property="tableView" destination="HbJ-NG-Us6" id="x4r-DP-Rrf"/>

@@ -11,6 +11,7 @@ import CoreData
 class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate  {
     
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var searchAddressTextField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,6 +28,8 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
     var currentSearch: String? = nil
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
+        initializeLocation()
+        checkLocation()
         restaurants.removeAll()
         managedObjectContext.reset()
         searchButtonTappedHelper()
@@ -35,9 +38,14 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func searchButtonTappedHelper() {
+        initializeLocation()
+        checkLocation()
         if let latitude = currentLatitude {
             if let longitude = currentLongitude {
-                fetchYelpBusinesses(term: searchTextField.text!, latitude: latitude, longitude: longitude)
+                fetchYelpBusinesses(termInput: searchTextField.text!,
+                                    termAddressInput: searchAddressTextField.text!,
+                                    latitude: latitude,
+                                    longitude: longitude)
             }
         }
     }
@@ -72,12 +80,35 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
     }
     
     // MARK: - Yelp API
-    fileprivate func fetchYelpBusinesses(term: String, latitude: Double, longitude: Double) {
+    fileprivate func fetchYelpBusinesses(termInput: String, termAddressInput: String, latitude: Double, longitude: Double) {
+        checkLocation()
+        
         var url: URL
+        var term = termInput
+        var termAddress = termAddressInput
+        
         if !term.isEmpty {
-            url = URL(string: "https://api.yelp.com/v3/businesses/search?term=\(term)&latitude=\(latitude)&longitude=\(longitude)")!
+            if term.contains(" ") {
+                term = term.replacingOccurrences(of: " ", with: "+")
+            }
+            if (termAddress.isEmpty) {
+                url = URL(string: "https://api.yelp.com/v3/businesses/search?term=\(term)&latitude=\(latitude)&longitude=\(longitude)")!
+            } else {
+                if termAddress.contains(" ") {
+                    termAddress = termAddress.replacingOccurrences(of: " ", with: "+")
+                }
+                url = URL(string: "https://api.yelp.com/v3/businesses/search?location=\(termAddress)&term=\(term)")!
+            }
         } else {
-            url = URL(string: "https://api.yelp.com/v3/businesses/search?latitude=\(latitude)&longitude=\(longitude)")!
+            if (termAddress.isEmpty) {
+                url = URL(string: "https://api.yelp.com/v3/businesses/search?latitude=\(latitude)&longitude=\(longitude)")!
+            } else {
+                if termAddress.contains(" ") {
+                    termAddress = termAddress.replacingOccurrences(of: " ", with: "+")
+                }
+                
+                url = URL(string: "https://api.yelp.com/v3/businesses/search?location=\(termAddress)")!
+            }
         }
         
         var request = URLRequest(url: url)
@@ -250,7 +281,6 @@ class SearchRestaurantsViewController: UIViewController, UITableViewDelegate, UI
             currentLongitude = longitude
             locationStr += String(format: ", %.6f", longitude)
         } else {locationStr += ", ?"}
-        print(locationStr)
     }
     
     // Delegate method called if location unavailable (recommended)

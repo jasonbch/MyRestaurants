@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var addRestaurantButton: UIButton!
     @IBOutlet weak var allRestaurantsButton: UIButton!
     @IBOutlet weak var foodButton: UIButton!
@@ -20,6 +20,7 @@ class MainViewController: UIViewController {
     var managedObjectContext: NSManagedObjectContext!
     var appDelegate: AppDelegate!
     var index = 0
+    var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,10 @@ class MainViewController: UIViewController {
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         managedObjectContext = appDelegate.persistentContainer.viewContext
         restaurants = fetchRestaurants()
+        
+        // Initialize location
+        initializeLocation()
+        checkLocation()
     }
     
     func update() {
@@ -151,6 +156,82 @@ class MainViewController: UIViewController {
             }
         }
         return tempRestaurant
+    }
+    
+    // MARK: - Location
+    
+    func initializeLocation() { // called from start up method
+        locationManager.delegate = self
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        let status = locationManager.authorizationStatus
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("location authorized")
+        case .denied, .restricted:
+            print("location not authorized")
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        @unknown default:
+            print("unknown location authorization")
+        }
+    }
+    
+    // Delegate method called whenever location authorization status changes
+    func locationManager(_ manager: CLLocationManager,
+        didChangeAuthorization status: CLAuthorizationStatus) {
+        if ((status == .authorizedAlways) || (status == .authorizedWhenInUse)) {
+            print("location changed to authorized")
+        } else {
+            print("location changed to not authorized")
+        self.stopLocation()
+        }
+    }
+    
+    func startLocation () {
+        let status = locationManager.authorizationStatus
+        if (status == .authorizedAlways) ||
+            (status == .authorizedWhenInUse) {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func stopLocation () {
+        locationManager.stopUpdatingLocation()
+    }
+    
+    // Delegate method called if location unavailable (recommended)
+    func locationManager(_ manager: CLLocationManager,
+        didFailWithError error: Error) {
+        print("locationManager error: \(error.localizedDescription)")
+    }
+    
+    func checkLocation() {
+        startLocation()
+        
+        let alert = UIAlertController(title: "Location Service Disabled",
+        message: "Go to device settings to enables locations servies for this app.", preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default,
+        handler: { (action) in
+        // execute some code when this option is selected
+            print("Okay!")
+        })
+        
+        alert.addAction(okayAction)
+        
+        let status = locationManager.authorizationStatus
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("location authorized")
+        case .denied, .restricted:
+            print("location not authorized")
+            present(alert, animated: true, completion: nil)
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        @unknown default:
+            print("unknown location authorization")
+        }
     }
 }
 
