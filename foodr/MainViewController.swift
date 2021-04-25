@@ -45,14 +45,16 @@ class MainViewController: UIViewController {
         restaurants = fetchRestaurants()
     }
     
-    func insertRestaurant(name: String, address: String, rating: Float?, image: UIImage?, id: String) -> NSManagedObject {
+    func insertRestaurant(name: String, address: String, city: String, state: String, rating: Float, image: UIImage?, id: String, note: String) -> NSManagedObject {
         let restaurant = NSEntityDescription.insertNewObject(forEntityName:
         "Restaurant", into: self.managedObjectContext)
         restaurant.setValue(name, forKey: "name")
         restaurant.setValue(address, forKey: "address")
+        restaurant.setValue(city, forKey: "city")
+        restaurant.setValue(state, forKey: "state")
         restaurant.setValue(rating, forKey: "rating")
         restaurant.setValue(image, forKey: "image")
-        restaurant.setValue(id, forKey: "id")
+        restaurant.setValue(note, forKey: "note")
         appDelegate.saveContext() // In AppDelegate.swift
         return restaurant
     }
@@ -126,13 +128,14 @@ class MainViewController: UIViewController {
             let secondVC = sender.source as! AddRestaurantViewController
             if let newName = secondVC.newName {
                 var restaurant: NSManagedObject
-                if let newAddress = secondVC.newAddress{
-                    restaurant = insertRestaurant(name: newName, address: newAddress, rating: nil, image: nil, id: "Default")
-                } else {
-                    restaurant = insertRestaurant(name: newName, address: "No Address", rating: nil, image: nil, id: "Default")
-                }
+                let address = secondVC.newAddress
+                let city = secondVC.newCity
+                let state = secondVC.newState
+                let rating = secondVC.newRating
+                let note = secondVC.newNote
+                
+                restaurant = insertRestaurant(name: newName, address: address!, city: city!, state: state!, rating: rating!, image: nil, id: "Default", note: note!)
                 restaurants.append(restaurant)
-                //self.tableView.reloadData()
             }
         }
     }

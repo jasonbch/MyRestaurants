@@ -27,6 +27,7 @@ class CollectionTableViewController: UITableViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        tableView.separatorStyle = .none
         self.tableView.reloadData()
     }
     
@@ -96,9 +97,31 @@ class CollectionTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             let restaurant = restaurants![indexPath.row]
-            restaurants!.remove(at: indexPath.row)
-            deleteRestaurant(restaurant)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            let name = restaurant.value(forKey: "name") as? String
+            
+            let alert = UIAlertController(title: "Delete Restaurant?",
+                                          message: name, preferredStyle: .alert)
+            
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive,
+                                             handler: { [self] (action) in
+                restaurants!.remove(at: indexPath.row)
+                deleteRestaurant(restaurant)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel,
+            handler: { (action) in
+                // Do Nothing
+            })
+            
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            
+            present(alert, animated: true, completion: nil)
+            
+
+            
         }
     }
     

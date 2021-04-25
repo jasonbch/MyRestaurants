@@ -46,7 +46,7 @@ class SearchRestaurantDetailViewController: UIViewController {
             restaurantAddressLabel?.text = myRestaurant.address
             restaurantCityLabel?.text = myRestaurant.city
             restaurantStateLabel?.text = myRestaurant.state
-            restaurantRatingLabel?.text = myRestaurant.rating.description + "⭐"
+            restaurantRatingLabel?.text = myRestaurant.rating.description
             restaurantNoteLabel?.text = "Note: "
             
             if let imageData = myRestaurant.image {
@@ -88,6 +88,25 @@ class SearchRestaurantDetailViewController: UIViewController {
     }
     
     @IBAction func addToCollectionButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Add to Collection?",
+                                      message: nil, preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Yes", style: .default,
+                                       handler: { [self] (action) in
+            addRestaurant()
+        })
+        
+        let cancelAction = UIAlertAction(title: "No", style: .cancel,
+        handler: { (action) in
+        })
+        
+        alert.addAction(okayAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func addRestaurant() {
         if let myRestaurant = tappedRestaurant {
             let name = myRestaurant.name
             let rating = myRestaurant.rating

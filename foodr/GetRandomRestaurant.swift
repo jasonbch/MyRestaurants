@@ -20,6 +20,10 @@ class GetRandomRestaurant: UIViewController {
     @IBOutlet weak var restaurantCityLabel: UILabel!
     @IBOutlet weak var restaurantStateLabel: UILabel!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var inLabel: UILabel!
+    @IBOutlet weak var commaLabel: UILabel!
+    
     @IBAction func zimzalabimButtonTapped(_ sender: Any) {
         let size = restaurants.count
         let random = Int.random(in: 0..<size)
@@ -27,7 +31,9 @@ class GetRandomRestaurant: UIViewController {
         restaurantNameLabel.text = randomRestaurant.value(forKey: "name") as? String
         restaurantCityLabel.text = randomRestaurant.value(forKey: "city") as? String
         restaurantStateLabel.text = randomRestaurant.value(forKey: "state") as? String
-
+        inLabel.text = "in"
+        commaLabel.text = ","
+        titleLabel.text = "The restaurant you should go to is:"
     }
     
     override func viewDidLoad() {
@@ -40,6 +46,14 @@ class GetRandomRestaurant: UIViewController {
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         managedObjectContext = appDelegate.persistentContainer.viewContext
         restaurants = fetchRestaurants()
+        
+        restaurantNameLabel.text = ""
+        restaurantCityLabel.text = ""
+        restaurantStateLabel.text = ""
+        
+        titleLabel.text = "Tap the button to get a restaurant!"
+        inLabel.text = ""
+        commaLabel.text = ""
     }
     
     
